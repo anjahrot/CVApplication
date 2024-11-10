@@ -1,8 +1,10 @@
-export default function InputItem({label, type, placeholder}){
+export default function InputItem({label, name, type="text", placeholder=""}){
     return (
         <>
-          <label>{label}</label>
-          <input type={type} placeholder={placeholder}></input>
+          <label>
+            {label}
+            <input name={name} type={type} placeholder={placeholder}></input> 
+          </label>
         </>
     )
 }

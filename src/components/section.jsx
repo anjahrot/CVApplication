@@ -1,13 +1,10 @@
-import InputItem from './inputItem.jsx'
-
-export default function Section({title, items}){
+export default function Section({title, children}){
     return(
         <>
          <h2>{title}</h2>
          <form>
-            {items.map(item => {
-                return <InputItem key={item} label={item} type='text' placeholder='John Doe'/>  
-            })}
+            {children}
+            <button type='submit'>Submit</button>
          </form>
         </>
     );
