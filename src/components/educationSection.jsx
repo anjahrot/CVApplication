@@ -1,32 +1,53 @@
 import {useState} from 'react';
 import EducationForm from './educationForm';
 
-export default function EducationSection ({data, onChange, onSubmit, update, defaultData}) {
+export default function EducationSection ({data, onChange, onSubmit, onDelete}) {
 
-    const [activeIndex, setActiveIndex] = useState(null);
+  return (
+    <>
+    <h3>Edit existing information</h3>
+      <ul style={{listStyle: 'none', margin: 0, padding: 0}}>
+        {data.map((education) => (
+          <li key={education.id}>
+            <Education education={education} onChange={onChange} onSubmit={onSubmit} onDelete={onDelete} />
+          </li>
+        ))}
+      </ul>
+    </>
+  )
+}
 
-    const handleAdd = () => {
-        console.log(data);
-        
-    }
+function Education({education, onChange, onSubmit, onDelete}){
+  const [isEditing, setIsEditing] = useState(false);
 
-    return (
-        <div className='eduSection'>
-          {typeof activeIndex === 'number' ? (
-            <>
-              <EducationForm 
-                data = {data[activeIndex]}
-                onChange = {onChange}
-                onSubmit = {onSubmit} 
-              />
-            </>
-          ) : (
-            <>
-             <h1>This is a test</h1>
-             <button onClick={() => handleAdd()}>Add New</button>    
-            </>
-          )
-        }
-        </div>
-    )
+  let educationContent;
+  if(isEditing) {
+    educationContent = (
+      <>
+        <EducationForm 
+            data = {education}
+            onChange = {(e) => {
+              onChange({...education, [e.target.name]:e.target.value})}}
+            onSubmit= {() => {
+              setIsEditing(false);
+              onSubmit();
+            }
+          }
+        />
+      </>
+    );
+  } else {
+    educationContent = (
+      <>
+        {education.school} - {education.degree}
+        <button onClick={() => setIsEditing(true)}>Edit</button>
+      </>
+    );
+  }
+  return (
+    <>
+      {educationContent}
+      <button onClick={()=>onDelete(education.id)}>Delete</button>
+    </>  
+  );
 }

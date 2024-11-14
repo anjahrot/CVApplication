@@ -5,7 +5,11 @@ export default function PersonalForm({data, onChange, onSubmit}){
 
     return (
         <>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={(e)=> {
+            e.preventDefault();
+            onSubmit()
+            }
+          }>
             <label>
               Full name
               <input 

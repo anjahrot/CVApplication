@@ -1,11 +1,12 @@
 export default function EducationForm ({data, onChange, onSubmit}) {
     
-    console.log(data);
-     
-    
     return (
         <>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit();
+            }
+          }>
             <label>
               School Name
               <input 
@@ -32,7 +33,7 @@ export default function EducationForm ({data, onChange, onSubmit}) {
                 name="startDate"
                 value = {data.startDate}
                 type='date'
-                placeholder='12-01-2012'
+                placeholder='2012-12-21'
                 onChange={onChange}
               />
             </label>
@@ -42,7 +43,7 @@ export default function EducationForm ({data, onChange, onSubmit}) {
                 name="endDate"
                 value={data.endDate}
                 type='date'
-                placeholder='20-12-2014'
+                placeholder='2014-12-22'
                 onChange={onChange}
               /> 
             </label>

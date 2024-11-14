@@ -4,6 +4,7 @@ import Resume from './components/resume.jsx'
 import InputSection from './components/inputSection.jsx'
 import PersonalForm from './components/personalForm.jsx'
 import EducationSection from './components/educationSection.jsx'
+import AddEducation from './components/addEducation.jsx'
 
 function App() {
   const [showResume, setShowResume] = useState(
@@ -22,8 +23,7 @@ function App() {
       }
     )
   
-  const handleSubmit = (e, section) => { 
-    e.preventDefault();
+  const handleSubmit = (section) => { 
     setShowResume((prevData) => ({...prevData, [section]: true}));
   }
     
@@ -38,32 +38,40 @@ function App() {
         id: crypto.randomUUID(),
         school: 'University of Sydney',
         degree: 'Bachelor of Science',
-        startDate: '21-12-2012',
-        endDate: '22-1-2015'
+        startDate: '2012-12-21',
+        endDate: '2015-01-22'
       },
     ]
   );
+ 
+ function handleChange(education){
+  setEducationInfo(
+    educationInfo.map((ed) => {
+      if (ed.id === education.id){
+        return education
+      } else {
+        return ed;
+    }
+  })
+  );  
+} 
 
-  //Method for change in input fields of an education
-  const handleChange = (e, index) => {
-    const prevData = educationInfo;
-    const {name, value} = e.target;
-    prevData[index] = {...prevData[index], [name]: value };
-    
-    setEducationInfo(prevData);
-  }
+  function handleAddEducation (education) {
+    setEducationInfo([
+      ...educationInfo, 
+    {
+      id: education.id,
+      school: education.school,
+      degree: education.degree,
+      startDate: education.startDate,
+      endDate: education.endDate
+    },
+  ]);
+}
 
-  const update = (newState) => {
-    setEducationInfo(newState);
-  }
-
-  const defaultEducationInput = {
-    id: crypto.randomUUID(),
-    school: '',
-    degree: '',
-    startDate: '',
-    endDate: ''
-  };
+ function handleDeleteEducation (educationId) {
+  setEducationInfo(educationInfo.filter((ed) => ed.id !== educationId));
+ }
 
 
   return (
@@ -79,19 +87,21 @@ function App() {
             <PersonalForm  
               data = {{...personalInfo}} 
               onChange= {handleChangePersonal}
-              onSubmit={e => {
-                handleSubmit(e, 'personal')}}
+              onSubmit={() => {
+                handleSubmit('personal')}}
             />
           </InputSection>
           
           <InputSection title='Education'>
+            <AddEducation 
+                onAddEducation={handleAddEducation}
+                />
             <EducationSection
-              data = {{...educationInfo}}
+              data = {[...educationInfo]}
               onChange = {handleChange}
-              onSubmit = {e => {
+              onSubmit = {(e) => {
                 handleSubmit(e, 'education')}}
-              update = {update}
-              defaultData = {defaultEducationInput}
+              onDelete = {handleDeleteEducation}
             />
           </InputSection>
 
