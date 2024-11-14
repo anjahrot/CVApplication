@@ -5,6 +5,8 @@ import InputSection from './components/inputSection.jsx'
 import PersonalForm from './components/personalForm.jsx'
 import EducationSection from './components/educationSection.jsx'
 import AddEducation from './components/addEducation.jsx'
+import AddWork from './components/addWork.jsx'
+import WorkSection from './components/workSection.jsx'
 
 function App() {
   const [showResume, setShowResume] = useState(
@@ -43,8 +45,21 @@ function App() {
       },
     ]
   );
+
+  const [workInfo, setWorkInfo] = useState(
+    [
+      {
+        id: crypto.randomUUID(),
+        company: 'ABB',
+        position: 'R&D Engineer',
+        startDate: '2016-01-29',
+        endDate: '2019-03-20',
+        description: 'Testing, labwork, reporting'
+      }
+    ]
+  )
  
- function handleChange(education){
+ function handleChange (education) {
   setEducationInfo(
     educationInfo.map((ed) => {
       if (ed.id === education.id){
@@ -56,6 +71,18 @@ function App() {
   );  
 } 
 
+  function handleChangeWork (work) {
+    setWorkInfo(
+      workInfo.map((w) => {
+        if(w.id === work.id) {
+          return work;
+        } else {
+          return w;
+        }
+      })
+    );
+  }
+
   function handleAddEducation (education) {
     setEducationInfo([
       ...educationInfo, 
@@ -66,12 +93,30 @@ function App() {
       startDate: education.startDate,
       endDate: education.endDate
     },
-  ]);
-}
+    ]);
+  }
 
- function handleDeleteEducation (educationId) {
-  setEducationInfo(educationInfo.filter((ed) => ed.id !== educationId));
- }
+  function handleAddWork (work) {
+    setWorkInfo([
+      ...workInfo,
+    {
+      id: crypto.randomUUID(),
+      company: work.company,
+      position: work.position,
+      startDate: work.startDate,
+      endDate: work.endDate,
+      description: work.description 
+    }
+    ])
+  }
+
+  function handleDeleteEducation (educationId) {
+      setEducationInfo(educationInfo.filter((ed) => ed.id !== educationId));
+  }
+
+  function handleDeleteWork (workId) {
+    setWorkInfo(workInfo.filter((w) => w.id !== workId));
+}
 
 
   return (
@@ -106,7 +151,16 @@ function App() {
           </InputSection>
 
           <InputSection title='Practical Experience'>
-
+            <AddWork 
+                onAddWork={handleAddWork}
+                />
+            <WorkSection
+              data = {[...workInfo]}
+              onChange = {handleChangeWork}
+              onSubmit = {(e) => {
+                handleSubmit(e, 'work')}}
+              onDelete = {handleDeleteWork}
+            />   
           </InputSection>
           
         </div>
