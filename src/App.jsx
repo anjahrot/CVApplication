@@ -3,10 +3,11 @@ import './App.css'
 import Resume from './components/resume.jsx'
 import InputSection from './components/inputSection.jsx'
 import PersonalForm from './components/personalForm.jsx'
-import EducationSection from './components/educationSection.jsx'
-import AddEducation from './components/addEducation.jsx'
-import AddWork from './components/addWork.jsx'
-import WorkSection from './components/workSection.jsx'
+import EducationForm from './components/educationForm.jsx'
+import WorkForm from './components/workForm.jsx'
+import EditSection from './components/editSection.jsx'
+import AddNewEntry from './components/addNew.jsx'
+import { initialStates } from './components/data.js'
 
 function App() {
   const [showResume, setShowResume] = useState(
@@ -138,28 +139,36 @@ function App() {
           </InputSection>
           
           <InputSection title='Education'>
-            <AddEducation 
+            <AddNewEntry
+                initialState={initialStates[0]} 
+                Form = {EducationForm}
                 onAddEducation={handleAddEducation}
                 />
-            <EducationSection
+            <EditSection
+              type = 'education'
               data = {[...educationInfo]}
               onChange = {handleChange}
               onSubmit = {(e) => {
                 handleSubmit(e, 'education')}}
               onDelete = {handleDeleteEducation}
+              Form = {EducationForm}
             />
           </InputSection>
 
           <InputSection title='Practical Experience'>
-            <AddWork 
+            <AddNewEntry
+                initialState={initialStates[1]} 
+                Form = {WorkForm} 
                 onAddWork={handleAddWork}
                 />
-            <WorkSection
+            <EditSection
+              type = 'work'
               data = {[...workInfo]}
               onChange = {handleChangeWork}
               onSubmit = {(e) => {
                 handleSubmit(e, 'work')}}
               onDelete = {handleDeleteWork}
+              Form = {WorkForm}
             />   
           </InputSection>
           
