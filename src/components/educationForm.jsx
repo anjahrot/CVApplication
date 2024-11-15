@@ -7,47 +7,53 @@ export default function EducationForm ({data, onChange, onSubmit}) {
             onSubmit();
             }
           }>
-            <label>
-              School Name
+            <ul>
+              <li>
+              <label htmlFor="school">School Name</label> 
               <input 
+                id="school"
                 name = "school"
                 value = {data.school}
                 type = "text"
                 placeholder='University of Sydney'
                 onChange = {onChange}
               />
-            </label>
-            <label>
-              Degree/Program
+             </li>
+             <li>
+              <label htmlFor="degree">Degree/Program</label>
               <input 
+                id="degree"
                 name="degree"
                 value = {data.degree}
                 type='text'
                 placeholder='Bachelor of Science'
                 onChange={onChange}
               />
-            </label>
-            <label>
-              Start date
-              <input
+            </li>
+            <li>
+             <label htmlFor="startDate">Start date</label>
+             <input
+                id="startDate"
                 name="startDate"
                 value = {data.startDate}
                 type='date'
                 placeholder='2012-12-21'
                 onChange={onChange}
               />
-            </label>
-            <label>
-              End date
+            </li>
+            <li>
+              <label htmlFor="endDate">End date</label>
               <input
+                id="endDate"
                 name="endDate"
                 value={data.endDate}
                 type='date'
                 placeholder='2014-12-22'
                 onChange={onChange}
               /> 
-            </label>
+            </li>
             <button>Submit</button>
+            </ul>
           </form>
         </>
     )

@@ -1,42 +1,79 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left; 
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.resume {
+  max-height: 80vh;
+  max-width: 80%;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 20px;
 }
 
-.card {
-  padding: 2em;
+.formSection {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
 }
 
-.read-the-docs {
-  color: #888;
+.formSection > form ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
 }
+
+form label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+form input {
+  width: 300px;
+  height: 20px;
+  padding: 5px;
+  font-size: 18px;
+}
+
+form textarea {
+  width: 300px;
+  height: 60px;
+  resize: none;
+  padding: 5px;
+}
+
+form button {
+  position: relative;
+  left: 165px;
+  width: 150px;
+  padding: 5px 10px;
+  background-color: rgb(82, 82, 211);
+  color: white;
+}
+
+.listButton {
+  background-color: rgb(82, 82, 211);
+  color: white;
+  margin-left: 10px;
+  padding: 5px 10px;
+}
+

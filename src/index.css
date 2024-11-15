@@ -52,17 +52,6 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.inputContainer {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  
-}
 
 @media (prefers-color-scheme: light) {
   :root {

@@ -10,6 +10,7 @@ import AddNewEntry from './components/addNew.jsx'
 import { initialStates } from './components/data.js'
 
 function App() {
+
   const [showResume, setShowResume] = useState(
     {
      personal: false, 
@@ -28,6 +29,7 @@ function App() {
   
   const handleSubmit = (section) => { 
     setShowResume((prevData) => ({...prevData, [section]: true}));
+    
   }
     
   const handleChangePersonal = (e) => {
@@ -123,13 +125,15 @@ function App() {
   return (
     <>
       <div className="container">
-        <Resume 
+        <Resume
           show = {{...showResume}}
           data = {{...personalInfo}}
         />
         <div className="inputContainer">
           <h2>Generate your CV here: </h2>
-          <InputSection title='Personal Details'>
+          <InputSection 
+            
+            title='Personal Details'>
             <PersonalForm  
               data = {{...personalInfo}} 
               onChange= {handleChangePersonal}
@@ -138,7 +142,9 @@ function App() {
             />
           </InputSection>
           
-          <InputSection title='Education'>
+          <InputSection 
+        
+            title='Education'>
             <AddNewEntry
                 initialState={initialStates[0]} 
                 Form = {EducationForm}
@@ -155,7 +161,9 @@ function App() {
             />
           </InputSection>
 
-          <InputSection title='Practical Experience'>
+          <InputSection 
+            
+            title='Practical Experience'>
             <AddNewEntry
                 initialState={initialStates[1]} 
                 Form = {WorkForm} 

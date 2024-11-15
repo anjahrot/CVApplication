@@ -45,14 +45,14 @@ function Element({element, type, onChange, onSubmit, onDelete, Form}){
     content = (
       <>
         {inputElements}
-        <button onClick={() => setIsEditing(true)}>Edit</button>
+        <button className="listButton" onClick={() => setIsEditing(true)}>Edit</button>
       </>
     );
   }
   return (
     <>
       {content}
-      <button onClick={()=>onDelete(element.id)}>Delete</button>
+      <button className="listButton" onClick={()=>onDelete(element.id)}>Delete</button>
     </>  
   );
 }
