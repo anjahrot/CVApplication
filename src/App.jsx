@@ -127,7 +127,9 @@ function App() {
       <div className="container">
         <Resume
           show = {{...showResume}}
-          data = {{...personalInfo}}
+          dataPersonal = {{...personalInfo}}
+          dataEducation = {{...educationInfo}}
+          dataWork = {{...workInfo}}
         />
         <div className="inputContainer">
           <h2>Generate your CV here: </h2>
