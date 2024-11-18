@@ -18,6 +18,24 @@ function App() {
      work: false
     } 
   )
+
+  const [showInput, setShowInput] = useState(
+    {
+      personal: true,
+      educationInfo: false,
+      work: false
+    }
+  )
+  
+  function showInputForm (section) {
+    setShowInput((prevData) => ({...prevData, [section]:true}))
+  }
+
+  function hideInputForm (section) {
+    setShowInput((prevData) => ({...prevData, [section]:false}))
+  }
+  
+
   const [personalInfo, setPersonalInfo] = useState(
       {
         fullname: '', 
@@ -135,18 +153,29 @@ function App() {
         <div className="inputContainer">
           <h2>Generate your CV here: </h2>
           <InputSection   
-            title='Personal Details'>
+            title='Personal Details'
+            show = {showInput.personal}
+            setShow = {() => showInputForm('personal')}
+            setHide = {() => hideInputForm('personal')} >
             <PersonalForm  
               data = {{...personalInfo}} 
               onChange= {handleChangePersonal}
               onSubmit={() => {
-                handleSubmit('personal')}}
+                handleSubmit('personal');
+                hideInputForm('personal');
+                showInputForm('education');
+               }
+              }
             />
           </InputSection>
           
           <InputSection        
-            title='Education'>
+            title='Education'
+            show = {showInput.education}
+            setShow = {() => showInputForm('education')}
+            setHide = {() => hideInputForm('education')}>
             <AddNewEntry
+                show = {showNewEntry}
                 initialState={initialStates[0]} 
                 Form = {EducationForm}
                 onAddEducation={handleAddEducation}
@@ -155,6 +184,7 @@ function App() {
               type = 'education'
               data = {[...educationInfo]}
               onChange = {handleChange}
+              onEdit = {toggleShowNewEntry}
               onSubmit = {() => {
                 handleSubmit('education')}}
               onDelete = {handleDeleteEducation}
@@ -163,7 +193,10 @@ function App() {
           </InputSection>
 
           <InputSection         
-            title='Practical Experience'>
+            title='Practical Experience'
+            show = {showInput.work}
+            setShow = {() => showInputForm('work')}
+            setHide = {() => hideInputForm('work')}>
             <AddNewEntry
                 initialState={initialStates[1]} 
                 Form = {WorkForm} 
@@ -173,6 +206,7 @@ function App() {
               type = 'work'
               data = {[...workInfo]}
               onChange = {handleChangeWork}
+              onEdit={toggleShowNewEntry}
               onSubmit = {() => {
                 handleSubmit('work')}}
               onDelete = {handleDeleteWork}

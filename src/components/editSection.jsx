@@ -1,13 +1,13 @@
 import {useState} from 'react';
 
-export default function EditSection ({type, data, onChange, onSubmit, onDelete, Form}) {
+export default function EditSection ({type, data, onChange, onEdit, onSubmit, onDelete, Form}) {
   return (
     <>
     <h3>Edit Entries</h3>
       <ul style={{listStyle: 'none', margin: 0, padding: 0}}>
         {data.map((element) => (
           <li key={element.id}>
-            <Element element={element} type={type} onChange={onChange} onSubmit={onSubmit} onDelete={onDelete} Form = {Form} />
+            <Element element={element} type={type} onChange={onChange} onEdit={onEdit} onSubmit={onSubmit} onDelete={onDelete} Form = {Form} />
           </li>
         ))}
       </ul>
@@ -15,8 +15,13 @@ export default function EditSection ({type, data, onChange, onSubmit, onDelete, 
   )
 }
 
-function Element({element, type, onChange, onSubmit, onDelete, Form}){
+function Element({element, type, onChange, onEdit, onSubmit, onDelete, Form}){
   const [isEditing, setIsEditing] = useState(false);
+
+  function handleEdit () {
+    setIsEditing(true);
+    onEdit();
+  }
 
   let content;
   if(isEditing) {
@@ -29,6 +34,7 @@ function Element({element, type, onChange, onSubmit, onDelete, Form}){
             onSubmit= {() => {
               setIsEditing(false);
               onSubmit();
+              onEdit();
             }
           }
         />
@@ -44,7 +50,7 @@ function Element({element, type, onChange, onSubmit, onDelete, Form}){
     content = (
       <>
         {inputElements}
-        <button className="listButton" onClick={() => setIsEditing(true)}>Edit</button>
+        <button className="listButton" onClick={() => handleEdit()}>Edit</button>
       </>
     );
   }
@@ -55,3 +61,4 @@ function Element({element, type, onChange, onSubmit, onDelete, Form}){
     </>  
   );
 }
+

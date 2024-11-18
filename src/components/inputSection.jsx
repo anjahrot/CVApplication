@@ -1,22 +1,26 @@
-import { useState } from "react";
+export default function InputSection({title, children, show, setShow, setHide}){
 
-export default function InputSection({title, children}){
-    const [show, setShow] = useState(false);  //Lift state up, to allow only one at a time
     let content;
     if(show) {
         content = (
            <>
+            <div className="topForm">
+                <h2>{title}</h2>
+                <button className='inputBtn' onClick={()=>setHide()}>Hide</button>
+            </div>
             {children}
            </>
         )
     } else {
         content = (
-            <button onClick={()=>setShow(true)}>Edit</button> 
+            <div className="topForm">
+                <h2>{title}</h2>
+            <button className='inputBtn' onClick={()=>setShow()}>Edit</button> 
+            </div>
         )
     }
     return(
-        <div className="formSection">
-         <h2>{title}</h2>    
+        <div className="formSection">    
          {content}      
         </div>
     );
