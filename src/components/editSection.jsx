@@ -1,7 +1,6 @@
 import {useState} from 'react';
 
 export default function EditSection ({type, data, onChange, onSubmit, onDelete, Form}) {
-
   return (
     <>
     <h3>Edit Entries</h3>

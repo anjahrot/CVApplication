@@ -3,6 +3,7 @@ import '../styles/resume.css'
 export default function Resume({show, dataPersonal, dataEducation, dataWork}){
     let personalInfo;
     let eduInfo;
+    let workInfo;
     if(show.personal) {
       personalInfo = (
         <div className='personalData'>
@@ -22,7 +23,39 @@ export default function Resume({show, dataPersonal, dataEducation, dataWork}){
     if(show.education) {
       eduInfo = (
         <>
-
+          <ul style={{listStyle: 'none', margin: 0, padding: 0}}>
+            {dataEducation.map((item) => (
+              <li key={item.id}>
+                <ListItem
+                    start={item.startDate}
+                    end={item.endDate}
+                    title={item.school}
+                    titleSec={item.degree}
+                />
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+    if(show.work) {
+      workInfo = (
+        <>
+          <ul style={{listStyle: 'none', margin: 0, padding: 0}}>
+            {dataWork.map((item) => (
+              <li key={item.id}>
+                <ListItem 
+                  start={item.startDate}
+                  end={item.endDate}
+                  title={item.company}
+                  titleSec ={item.position}
+                />
+                <div className='description'>
+                  <Description description={item.description}/>
+                </div>
+              </li>
+            ))}
+          </ul>
         </>
       )
     }
@@ -36,7 +69,21 @@ export default function Resume({show, dataPersonal, dataEducation, dataWork}){
             <h2>Education</h2>
               {eduInfo}
             <h2>Work Experience</h2>
+              {workInfo}
           </div>
         </div>
     );
+};
+
+function ListItem ({start, end, title, titleSec}) {
+  return (
+    start + ' - ' + end + ' ' + title + ', ' + titleSec 
+  )
+}
+
+
+function Description ({description}) {
+  return (
+    'Job description: ' + description
+  )
 }

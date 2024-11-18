@@ -33,3 +33,7 @@ svg {
     height: auto;
     fill: white;
 }
+
+.description {
+    font-style: italic; 
+}
