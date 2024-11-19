@@ -4,7 +4,7 @@ export default function EditSection ({type, data, onChange, onEdit, onSubmit, on
   return (
     <>
     <h3>Edit Entries</h3>
-      <ul style={{listStyle: 'none', margin: 0, padding: 0}}>
+      <ul style={{listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '5px'}}>
         {data.map((element) => (
           <li key={element.id}>
             <Element element={element} type={type} onChange={onChange} onEdit={onEdit} onSubmit={onSubmit} onDelete={onDelete} Form = {Form} />

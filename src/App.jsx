@@ -34,6 +34,18 @@ function App() {
   function hideInputForm (section) {
     setShowInput((prevData) => ({...prevData, [section]:false}))
   }
+
+  const [showNewEduForm, setShowNewEduForm] = useState(true)
+
+  const [showNewWorkForm, setShowNewWorkForm] = useState(true)
+
+  function toggleShowNewEduForm () {
+    setShowNewEduForm(curr => !curr)
+  }
+
+  function toggleShowNewWorkForm () {
+    setShowNewWorkForm(curr => !curr)
+  }
   
 
   const [personalInfo, setPersonalInfo] = useState(
@@ -104,7 +116,7 @@ function App() {
   }
 
   function handleAddEducation (education) {
-    handleSubmit('education');
+    handleSubmit('education');  //Setting showResume to true on submit
     setEducationInfo([
       ...educationInfo, 
     {
@@ -118,7 +130,7 @@ function App() {
   }
 
   function handleAddWork (work) {
-    handleSubmit('work');
+    handleSubmit('work');  //Setting showResume to true on submit
     setWorkInfo([
       ...workInfo,
     {
@@ -175,16 +187,16 @@ function App() {
             setShow = {() => showInputForm('education')}
             setHide = {() => hideInputForm('education')}>
             <AddNewEntry
-                show = {showNewEntry}
+                show = {showNewEduForm}  
                 initialState={initialStates[0]} 
                 Form = {EducationForm}
-                onAddEducation={handleAddEducation}
+                onAdd={handleAddEducation}
                 />
             <EditSection
               type = 'education'
               data = {[...educationInfo]}
               onChange = {handleChange}
-              onEdit = {toggleShowNewEntry}
+              onEdit = {toggleShowNewEduForm}
               onSubmit = {() => {
                 handleSubmit('education')}}
               onDelete = {handleDeleteEducation}
@@ -198,15 +210,16 @@ function App() {
             setShow = {() => showInputForm('work')}
             setHide = {() => hideInputForm('work')}>
             <AddNewEntry
+                show = {showNewWorkForm}
                 initialState={initialStates[1]} 
                 Form = {WorkForm} 
-                onAddWork={handleAddWork}
+                onAdd={handleAddWork}
                 />
             <EditSection
               type = 'work'
               data = {[...workInfo]}
               onChange = {handleChangeWork}
-              onEdit={toggleShowNewEntry}
+              onEdit={toggleShowNewWorkForm}
               onSubmit = {() => {
                 handleSubmit('work')}}
               onDelete = {handleDeleteWork}

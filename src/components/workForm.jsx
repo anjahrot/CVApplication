@@ -1,3 +1,5 @@
+import '../styles/form.css'
+
 export default function WorkForm ({data, onChange, onSubmit}) {
     
     return (

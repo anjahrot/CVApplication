@@ -23,7 +23,7 @@ export default function Resume({show, dataPersonal, dataEducation, dataWork}){
     if(show.education) {
       eduInfo = (
         <>
-          <ul style={{listStyle: 'none', margin: 0, padding: 0}}>
+          <ul style={{listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '10px'}}>
             {dataEducation.map((item) => (
               <li key={item.id}>
                 <ListItem
@@ -41,7 +41,7 @@ export default function Resume({show, dataPersonal, dataEducation, dataWork}){
     if(show.work) {
       workInfo = (
         <>
-          <ul style={{listStyle: 'none', margin: 0, padding: 0}}>
+          <ul style={{listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '10px'}}>
             {dataWork.map((item) => (
               <li key={item.id}>
                 <ListItem 

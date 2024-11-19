@@ -35,5 +35,6 @@ svg {
 }
 
 .description {
-    font-style: italic; 
+    font-style: italic;
+    text-align: end;
 }

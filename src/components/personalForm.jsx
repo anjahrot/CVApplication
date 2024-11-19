@@ -1,3 +1,5 @@
+import '../styles/form.css'
+
 export default function PersonalForm({data, onChange, onSubmit}){
 
     const {fullname, birthday, email, phone} = data; 

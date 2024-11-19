@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
 
-export default function AddNewEntry({initialState, Form, onAddEducation, show}) {
+export default function AddNewEntry({initialState, Form, onAdd, show}) {
     const [newElement, setNewElement] = useState(initialState)
     if(show){
     return (
@@ -12,7 +12,7 @@ export default function AddNewEntry({initialState, Form, onAddEducation, show}) 
             onChange = {(e) => setNewElement((prevData) => ({...prevData, [e.target.name]: e.target.value}))}
             onSubmit={() => {
                 setNewElement(initialState);
-                onAddEducation(newElement);
+                onAdd(newElement);
             }} />
         </>
     );
