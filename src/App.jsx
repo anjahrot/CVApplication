@@ -120,7 +120,7 @@ function App() {
     setEducationInfo([
       ...educationInfo, 
     {
-      id: education.id,
+      id: crypto.randomUUID(),
       school: education.school,
       degree: education.degree,
       startDate: education.startDate,
